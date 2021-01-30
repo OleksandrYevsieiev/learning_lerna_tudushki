@@ -14,7 +14,7 @@ module.exports.createTask = async (req, res, next) => {
 
 module.exports.getTask = async (req, res, next) => {
   const {
-    params: { taskId },
+    params: { taskId }
   } = req;
   try {
     const foundTask = await Task.findByPk(taskId);
@@ -30,7 +30,7 @@ module.exports.getTask = async (req, res, next) => {
 module.exports.getAllTasks = async (req, res, next) => {
   try {
     const foundTasks = await Task.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
     });
     console.log('foundTasks :>> ', foundTasks);
     res.status(200).send(foundTasks);
@@ -41,7 +41,7 @@ module.exports.getAllTasks = async (req, res, next) => {
 module.exports.updateTask = async (req, res, next) => {
   const {
     body,
-    params: { taskId },
+    params: { taskId }
   } = req;
   try {
     const foundTask = await Task.findByPk(taskId);
@@ -56,14 +56,14 @@ module.exports.updateTask = async (req, res, next) => {
 };
 module.exports.removeTask = async (req, res, next) => {
   const {
-    params: { taskId },
+    params: { taskId }
   } = req;
   try {
     const removedTask = await Task.delete(taskId);
     if (removedTask) {
       return res.status(200).send(removedTask);
     }
-    return res.status(404).send(`Task not found`);
+    return res.status(404).send('Task not found');
   } catch (err) {
     next(err);
   }

@@ -3,7 +3,7 @@ import ACTION_TYPES from '../actions/types';
 const initialState = {
   tasks: [],
   isFetching: false,
-  error: null,
+  error: null
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
-        error: false,
+        error: false
       };
     }
     case ACTION_TYPES.CREATE_TASK_SUCCESS: {
@@ -26,7 +26,7 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         tasks: [...tasks, task],
         isFetching: false,
-        error: false,
+        error: false
       };
     }
     case ACTION_TYPES.GET_TASKS_ERROR:
@@ -36,7 +36,7 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        error,
+        error
       };
     }
     default: {

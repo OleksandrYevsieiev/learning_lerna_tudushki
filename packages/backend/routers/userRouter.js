@@ -9,14 +9,13 @@ const userRouter = Router();
 userRouter.post('/:userId/tasks', userController.createUserTask);
 userRouter.get('/:userId/tasks', userController.getUserTasks);
 
-userRouter.post('/',userController.createUser);
-userRouter.get('/',userController.getAllUsers);
+userRouter.post('/', userController.createUser);
+userRouter.get('/', userController.getAllUsers);
 
 userRouter
   .route('/:userId')
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
-
 
 module.exports = userRouter;

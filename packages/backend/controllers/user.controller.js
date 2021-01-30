@@ -9,7 +9,7 @@ module.exports.createUser = async (req, res, next) => {
       'id',
       'passwordHash',
       'createdAt',
-      'updatedAt',
+      'updatedAt'
     ]);
     res.status(201).send({ data: preparedUser });
   } catch (err) {
@@ -19,14 +19,14 @@ module.exports.createUser = async (req, res, next) => {
 
 module.exports.getUser = async (req, res, next) => {
   const {
-    params: { userId },
+    params: { userId }
   } = req;
 
   try {
     const getUs = await User.findByPk(userId, {
       attributes: {
-        exclude: ['id', 'passwordHash', 'createdAt', 'updatedAt'],
-      },
+        exclude: ['id', 'passwordHash', 'createdAt', 'updatedAt']
+      }
     });
     if (getUs) {
       return res.status(200).send({ data: getUs });
@@ -41,8 +41,8 @@ module.exports.getAllUsers = async (req, res, next) => {
   try {
     const getUss = await User.findAll({
       attributes: {
-        exclude: ['id', 'passwordHash', 'createdAt', 'updatedAt'],
-      },
+        exclude: ['id', 'passwordHash', 'createdAt', 'updatedAt']
+      }
     });
     return res.status(200).send({ data: getUss });
   } catch (err) {
@@ -53,7 +53,7 @@ module.exports.getAllUsers = async (req, res, next) => {
 module.exports.createUserTask = async (req, res, next) => {
   const {
     body,
-    params: { userId },
+    params: { userId }
   } = req;
   console.log('body :>> ', body);
   console.log('userId :>> ', userId);
@@ -75,15 +75,15 @@ module.exports.createUserTask = async (req, res, next) => {
 
 module.exports.getUserTasks = async (req, res, next) => {
   const {
-    params: { userId },
+    params: { userId }
   } = req;
   try {
     const foundTasks = await Task.findAll({
       include: {
         model: User,
         where: { id: userId },
-        attributes: { exclude: ['id'] },
-      },
+        attributes: { exclude: ['id'] }
+      }
     });
     if (foundTasks) {
       return res.status(200).send({ data: foundTasks });
@@ -97,7 +97,7 @@ module.exports.getUserTasks = async (req, res, next) => {
 module.exports.updateUser = async (req, res, next) => {
   const {
     body,
-    params: { userId },
+    params: { userId }
   } = req;
   try {
     const foundUser = await User.findByPk(userId);
@@ -114,7 +114,7 @@ module.exports.updateUser = async (req, res, next) => {
 module.exports.deleteUser = async (req, res, next) => {
   const {
     body,
-    params: { userId },
+    params: { userId }
   } = req;
   try {
     const foundUser = await User.findByPk(userId);

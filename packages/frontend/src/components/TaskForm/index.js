@@ -12,7 +12,7 @@ const TaskForm = () => {
     <Formik
       initialValues={{
         data: 'New Task ',
-        isDone: false,
+        isDone: false
       }}
       onSubmit={(values) => createTask(values)}>
       {(formik) => (

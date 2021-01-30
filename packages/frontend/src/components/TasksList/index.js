@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as todoActionCreators from '../../actions/todoActionCreators';
 
-function TasksListItem(props) {
+function TasksListItem (props) {
   const { task: t } = props;
 
   return (
