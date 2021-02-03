@@ -10,15 +10,18 @@ const todoReducer = (state = initialState, action) => {
   const { type } = action;
 
   switch (type) {
+    case ACTION_TYPES.GET_TASKS:
+    case ACTION_TYPES.GET_TASKS_REQUEST:
     case ACTION_TYPES.CREATE_TASK_REQUEST:
-    case ACTION_TYPES.GET_TASKS_REQUEST: {
+    {
       return {
         ...state,
         isFetching: true,
         error: false
       };
     }
-    case ACTION_TYPES.CREATE_TASK_SUCCESS: {
+    case ACTION_TYPES.CREATE_TASK_SUCCESS:
+    {
       const { task } = action;
       const { tasks } = state;
 

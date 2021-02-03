@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as todoActionCreators from '../../actions/todoActionCreators';
 
-function TasksListItem (props) {
-  const { task: t } = props;
+const TasksListItem = (props) => {
+  const { tasks: t } = props || {};
 
   return (
     <li key={t.id}>
@@ -12,10 +12,10 @@ function TasksListItem (props) {
       <input type='checkbox' checked={t.isDone} />
     </li>
   );
-}
+};
 
 const TasksList = () => {
-  const { tasks, isFetching, error } = useSelector((state) => state.tasks);
+  const tasks/* , isFetching, error  */ = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   const { getTasks } = bindActionCreators(todoActionCreators, dispatch);
 
@@ -26,10 +26,10 @@ const TasksList = () => {
   return (
     <ul>
       {tasks.map((t) => (
-        <TasksListItem task={t} />
+        <TasksListItem key={t.index} task={t} />
       ))}
-      {isFetching && <li>Loading...</li>}
-      {error && <li>ERROR</li>}
+{/*       {isFetching && <li>Loading...</li>}
+      {error && <li>ERROR</li>} */}
     </ul>
   );
 };

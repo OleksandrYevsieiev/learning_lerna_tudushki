@@ -5,5 +5,5 @@ const apiInstance = axios.create({
 });
 
 export const createTask = (data) => apiInstance.post('/tasks', data);
-// пагинация захардкожена
-export const getTasks = () => apiInstance.get('/tasks?page=2&item_on_page=5');
+
+export const getTasks = (params) => apiInstance.get(`/tasks?page=${params.page}&results=${params.results}`);
