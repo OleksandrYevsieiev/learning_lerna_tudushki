@@ -12,7 +12,7 @@ module.exports.createTask = async (req, res, next) => {
   }
 };
 
-module.exports.getTask = async (req, res, next) => {
+/* module.exports.getTask = async (req, res, next) => {
   const {
     params: { taskId }
   } = req;
@@ -25,20 +25,25 @@ module.exports.getTask = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}; */
 
 module.exports.getAllTasks = async (req, res, next) => {
+  const {
+    pagination: { page, results }
+  } = req;
   try {
     const foundTasks = await Task.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt'] }
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      limit: results,
+      offset: (page - 1) * results
     });
-    console.log('foundTasks :>> ', foundTasks);
-    res.status(200).send(foundTasks);
+
+    res.status(200).send({ data: foundTasks });
   } catch (err) {
     next(err);
   }
 };
-module.exports.updateTask = async (req, res, next) => {
+/* module.exports.updateTask = async (req, res, next) => {
   const {
     body,
     params: { taskId }
@@ -68,3 +73,4 @@ module.exports.removeTask = async (req, res, next) => {
     next(err);
   }
 };
+ */

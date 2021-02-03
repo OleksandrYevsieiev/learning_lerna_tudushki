@@ -1,8 +1,8 @@
 import ACTION_TYPES from './types';
 
-export const createTask = (values) => ({
+export const createTask = (data) => ({
   type: ACTION_TYPES.CREATE_TASK,
-  values
+  data
 });
 
 export const createTaskRequest = () => ({
@@ -19,8 +19,9 @@ export const createTaskError = (error) => ({
   error
 });
 
-export const getTasks = () => ({
-  type: ACTION_TYPES.GET_TASKS
+export const getTasks = (params) => ({
+  type: ACTION_TYPES.GET_TASKS,
+  params
 });
 
 export const getTasksRequest = () => ({
@@ -35,15 +36,4 @@ export const getTasksSuccess = (tasks) => ({
 export const getTasksError = (error) => ({
   type: ACTION_TYPES.GET_TASKS_ERROR,
   error
-});
-
-export const updateTask = (value, taskIndex) => ({
-  type: ACTION_TYPES.UPDATE_TASK,
-  taskIndex,
-  value
-});
-
-export const removeTask = (taskIndex) => ({
-  type: ACTION_TYPES.REMOVE_TASK,
-  taskIndex
 });

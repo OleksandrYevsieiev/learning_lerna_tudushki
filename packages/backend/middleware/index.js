@@ -1,3 +1,2 @@
-module.exports.validateTask = require('./validate.task.mw');
-
-module.exports.errorHandlers = require('./errorHandlers.mw');
+module.exports.errorsHandler = require('./errorsHandler.mw');
+module.exports.reducePagination = require('./reducePagination.task.mw');
