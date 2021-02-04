@@ -5,11 +5,11 @@ import * as todoActionCreators from '../../actions/todoActionCreators';
 
 const TasksListItem = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { tasks: { id, data, isDone } } = props;
+  const { task: { id, data, isDone } } = props;
 
   return (
     <li key={id}>
-      {data}
+      data:{data}, isDone: {isDone}
       <input type='checkbox' checked={isDone} />
     </li>
   );

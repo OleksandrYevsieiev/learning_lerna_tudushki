@@ -22,13 +22,14 @@ export function * createTaskSaga ({ data }) {
   }
 }
 
-export function * getTasksSaga () {
+export function * getTasksSaga (action) {
+  const { params } = action;
   yield put(getTasksRequest());
 
   try {
     const {
       data: { data: tasks }
-    } = yield API.getTasks();
+    } = yield API.getTasks(params);
     yield put(getTasksSuccess(tasks));
   } catch (error) {
     yield put(getTasksError(error));
