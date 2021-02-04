@@ -7,7 +7,7 @@ const taskRouter = Router();
 taskRouter
   .route('/')
   .post(taskController.createTask)
-  .get(reducePagination.reducePagination, taskController.getAllTasks);
+  .get(reducePagination, taskController.getAllTasks);
 
 /* taskRouter
   .route('/:taskId')

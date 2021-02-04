@@ -5,7 +5,7 @@ const PAGINATION_SCHEMA = yup.object({
   results: yup.number().min(1)
 });
 
-module.exports.reducePagination = async (req, res, next) => {
+const reducePagination = async (req, res, next) => {
   const { query: { page, results } } = req;
 
   const defaultPagination = {
@@ -26,3 +26,5 @@ module.exports.reducePagination = async (req, res, next) => {
   req.pagination = defaultPagination;
   next();
 };
+
+module.exports = reducePagination;

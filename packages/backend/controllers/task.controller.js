@@ -4,7 +4,10 @@ module.exports.createTask = async (req, res, next) => {
   const { body } = req;
   try {
     const createdTask = await Task.create(body);
-    res.status(201).send({ data: createdTask });
+    if (createdTask) {
+      return res.status(201).send({ data: createdTask });
+    }
+    res.status(400).send('Bad request');
   } catch (err) {
     next(err);
   }
@@ -31,11 +34,10 @@ module.exports.getAllTasks = async (req, res, next) => {
   } = req;
   try {
     const foundTasks = await Task.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
       limit: results,
       offset: (page - 1) * results
     });
-
     res.status(200).send({ data: foundTasks });
   } catch (err) {
     next(err);
