@@ -23,17 +23,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.BOOLEAN
       },
-      deadline: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        validate: {
-          notNull: true
-        }
-      },
-      userId: {
-        allowNull: false,
-        type: DataTypes.INTEGER
-      }
     },
     {
       sequelize,
