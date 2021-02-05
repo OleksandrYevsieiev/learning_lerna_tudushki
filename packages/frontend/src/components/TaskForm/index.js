@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as todoActionCreators from '../../actions/todoActionCreators';
+import styles from './TaskForm.module.css';
 
 const TaskForm = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,10 @@ const TaskForm = () => {
       }}
       onSubmit={(values) => createTask(values)}>
       {(formik) => (
-        <Form>
-          <Field name='data' />
-          <button type='submit'>Create task</button>
-          <button type='reset'>Reset</button>
+        <Form className={styles.container}>
+          <Field className={styles.input} name='data' />
+          <button className={styles.add} type='submit'>Create task</button>
+          <button className={styles.add} type='reset'>Reset</button>
         </Form>
       )}
     </Formik>

@@ -2,16 +2,30 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as todoActionCreators from '../../actions/todoActionCreators';
+import styles from './../TasksList/TaskList.module.css';
+import Icon from '@mdi/react';
+import { mdiDelete } from '@mdi/js';
 
 const TasksListItem = (props) => {
   // eslint-disable-next-line react/prop-types
   const { task: { id, data, isDone } } = props;
+  const iconProps = {
+    /* this is to avoid the following error:
+    Type '{ className: string; path: string; size: number; onClick: any; }'
+    is not assignable to type 'IntrinsicAttributes & IconProps & { children?: ReactNode; }'. */
 
+    className: styles.icon,
+    path: mdiDelete,
+    size: 1,
+  };
   return (
-    <li key={id}>
-      {data} {isDone}
+
+    <div className={styles.task} key={id}>
+      <div className={styles.text}>{data}</div>
       <input type='checkbox' checked={isDone} onChange={()=>{}}/>
-    </li>
+      <Icon {...iconProps} />
+    </div>
+
   );
 };
 
@@ -25,14 +39,14 @@ const TasksList = () => {
   }, []);
 
   return (
-    <ul>
+    <div className={styles.tasksContainer}>
       {tasks.map((t) => (
         // eslint-disable-next-line react/jsx-key
         <TasksListItem key={t.id} task={t} />
       ))}
      {isFetching && <li>Loading...</li>}
      {error && <li>ERROR</li>}
-    </ul>
+    </div>
   );
 };
 
