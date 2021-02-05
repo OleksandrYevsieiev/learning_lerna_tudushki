@@ -11,7 +11,8 @@ const todoReducer = (state = initialState, action) => {
 
   switch (type) {
     case ACTION_TYPES.GET_TASKS_REQUEST:
-    case ACTION_TYPES.CREATE_TASK_REQUEST: {
+    case ACTION_TYPES.CREATE_TASK_REQUEST:
+    case ACTION_TYPES.REMOVE_TASK_REQUEST: {
       return {
         ...state,
         isFetching: true,
@@ -40,8 +41,21 @@ const todoReducer = (state = initialState, action) => {
       };
     }
 
+    case ACTION_TYPES.REMOVE_TASK_SUCCESS: {
+      const { id } = action;
+      const { tasks } = state;
+      const tasksRemained = tasks.length > 1 ? tasks.splice(id, 1) : tasks;
+      return {
+        ...state,
+        tasks:  [...tasksRemained],
+        isFetching: false,
+        error: false
+      };
+    }
+
     case ACTION_TYPES.GET_TASKS_ERROR:
-    case ACTION_TYPES.CREATE_TASK_ERROR: {
+    case ACTION_TYPES.CREATE_TASK_ERROR:
+    case ACTION_TYPES.REMOVE_TASK_ERROR: {
       const { error } = action;
       return {
         ...state,

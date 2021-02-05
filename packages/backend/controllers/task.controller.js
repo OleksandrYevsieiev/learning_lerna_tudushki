@@ -15,10 +15,10 @@ module.exports.createTask = async (req, res, next) => {
 
 /* module.exports.getTask = async (req, res, next) => {
   const {
-    params: { taskId }
+    params: { id }
   } = req;
   try {
-    const foundTask = await Task.findByPk(taskId);
+    const foundTask = await Task.findByPk(id);
     if (foundTask) {
       return res.status(200).send(foundTask);
     }
@@ -46,10 +46,10 @@ module.exports.getAllTasks = async (req, res, next) => {
 /* module.exports.updateTask = async (req, res, next) => {
   const {
     body,
-    params: { taskId }
+    params: { id }
   } = req;
   try {
-    const foundTask = await Task.findByPk(taskId);
+    const foundTask = await Task.findByPk(id);
     if (foundTask) {
       const updatedTask = await foundTask.update(body);
       return res.status(200).send(updatedTask);
@@ -59,18 +59,19 @@ module.exports.getAllTasks = async (req, res, next) => {
     next(err);
   }
 };
+ */
 module.exports.removeTask = async (req, res, next) => {
   const {
-    params: { taskId }
+    params: { id }
   } = req;
   try {
-    const removedTask = await Task.delete(taskId);
+    const removedTask = await Task.destroy({ where: { id: id } });
     if (removedTask) {
-      return res.status(200).send(removedTask);
+      return res.status(200).send('task removed');
     }
     return res.status(404).send('Task not found');
   } catch (err) {
     next(err);
   }
 };
- */
+

@@ -9,10 +9,10 @@ taskRouter
   .post(taskController.createTask)
   .get(reducePagination, taskController.getAllTasks);
 
-/* taskRouter
-  .route('/:taskId')
-  .get(taskController.getTask)
-  .patch(taskController.updateTask)
-  .delete(taskController.removeTask); */
+taskRouter
+  .route('/:id')
+/*   .get(taskController.getTask)
+  .patch(taskController.updateTask) */
+  .delete(taskController.removeTask);
 
 module.exports = taskRouter;

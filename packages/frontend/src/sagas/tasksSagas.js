@@ -5,7 +5,10 @@ import {
   createTaskError,
   getTasksRequest,
   getTasksSuccess,
-  getTasksError
+  getTasksError,
+  removeTaskRequest,
+  removeTaskSuccess,
+  removeTaskError
 } from '../actions/todoActionCreators';
 import * as API from './../api';
 
@@ -34,4 +37,20 @@ export function * getTasksSaga (action) {
   } catch (error) {
     yield put(getTasksError(error));
   }
+}
+
+export function * removeTaskSaga(action){
+  const { id } = action;
+  yield put(removeTaskRequest());
+
+  try {
+     const {
+      data: { data: task }
+    } = yield API.removeTask(id);
+    yield put(removeTaskSuccess(task));
+  }
+  catch(error) {
+    yield put(removeTaskError(error));
+  }
+
 }

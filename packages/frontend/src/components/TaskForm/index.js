@@ -18,7 +18,7 @@ const TaskForm = () => {
       onSubmit={(values) => createTask(values)}>
       {(formik) => (
         <Form className={styles.container}>
-          <Field className={styles.input} name='data' />
+          <Field className={styles.input} name='data' placeholder='Write your task here...'/>
           <button className={styles.add} type='submit'>Create task</button>
           <button className={styles.add} type='reset'>Reset</button>
         </Form>

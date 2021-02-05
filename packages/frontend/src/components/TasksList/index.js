@@ -8,22 +8,20 @@ import { mdiDelete } from '@mdi/js';
 
 const TasksListItem = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { task: { id, data, isDone } } = props;
-  const iconProps = {
-    /* this is to avoid the following error:
-    Type '{ className: string; path: string; size: number; onClick: any; }'
-    is not assignable to type 'IntrinsicAttributes & IconProps & { children?: ReactNode; }'. */
+  const { task: { id, data, isDone }, removeTask } = props;
 
+  const iconProps = {
     className: styles.icon,
     path: mdiDelete,
     size: 1,
   };
+
   return (
 
     <div className={styles.task} key={id}>
-      <div className={styles.text}>{data}</div>
       <input type='checkbox' checked={isDone} onChange={()=>{}}/>
-      <Icon {...iconProps} />
+      <div className={styles.text}>{data}</div>
+      <Icon {...iconProps} onClick={()=>removeTask(id)}/>
     </div>
 
   );
@@ -33,6 +31,7 @@ const TasksList = () => {
   const { tasks, isFetching, error } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
   const { getTasks } = bindActionCreators(todoActionCreators, dispatch);
+  const { removeTask } = bindActionCreators(todoActionCreators, dispatch);
 
   useEffect(() => {
     getTasks({ page: 1, results: 10 });
@@ -42,7 +41,7 @@ const TasksList = () => {
     <div className={styles.tasksContainer}>
       {tasks.map((t) => (
         // eslint-disable-next-line react/jsx-key
-        <TasksListItem key={t.id} task={t} />
+        <TasksListItem key={t.id} task={t} removeTask={removeTask} />
       ))}
      {isFetching && <li>Loading...</li>}
      {error && <li>ERROR</li>}
