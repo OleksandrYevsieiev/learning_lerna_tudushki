@@ -34,7 +34,7 @@ module.exports.getAllTasks = async (req, res, next) => {
   } = req;
   try {
     const foundTasks = await Task.findAll({
-      attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       limit: results,
       offset: (page - 1) * results
     });

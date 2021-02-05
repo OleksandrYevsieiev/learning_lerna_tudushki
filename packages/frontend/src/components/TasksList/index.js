@@ -9,8 +9,8 @@ const TasksListItem = (props) => {
 
   return (
     <li key={id}>
-      data:{data}, isDone: {isDone}
-      <input type='checkbox' checked={isDone} />
+      {data} {isDone}
+      <input type='checkbox' checked={isDone} onChange={()=>{}}/>
     </li>
   );
 };
@@ -28,7 +28,7 @@ const TasksList = () => {
     <ul>
       {tasks.map((t) => (
         // eslint-disable-next-line react/jsx-key
-        <TasksListItem task={t} />
+        <TasksListItem key={t.id} task={t} />
       ))}
      {isFetching && <li>Loading...</li>}
      {error && <li>ERROR</li>}
