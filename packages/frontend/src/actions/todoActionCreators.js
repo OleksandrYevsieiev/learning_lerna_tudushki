@@ -43,21 +43,17 @@ export const getTasksError = (error) => ({
 
 // ---------------------------------------------
 
-export const removeTask = (id) => ({
+export const removeTaskAction = (id) => ({
   type: ACTION_TYPES.REMOVE_TASK,
-  id
+  payload: { id }
 });
 
-export const removeTaskRequest = () => ({
-  type: ACTION_TYPES.REMOVE_TASK_REQUEST
-});
-
-export const removeTaskSuccess = (task) => ({
+export const removeTaskSuccess = (id) => ({
   type: ACTION_TYPES.REMOVE_TASK_SUCCESS,
-  task
+  payload: { id }
 });
 
 export const removeTaskError = (error) => ({
   type: ACTION_TYPES.REMOVE_TASK_ERROR,
-  error
+  payload: { error }
 });

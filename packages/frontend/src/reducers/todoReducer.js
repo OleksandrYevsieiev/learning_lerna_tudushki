@@ -42,9 +42,9 @@ const todoReducer = (state = initialState, action) => {
     }
 
     case ACTION_TYPES.REMOVE_TASK_SUCCESS: {
-      const { id } = action;
+      const { payload: { id } } = action;
       const { tasks } = state;
-      const tasksRemained = tasks.length > 1 ? tasks.splice(id, 1) : tasks;
+      const tasksRemained = tasks.filter((task)=> task.id !== +id);
       return {
         ...state,
         tasks:  [...tasksRemained],

@@ -8,7 +8,9 @@ import { mdiDelete } from '@mdi/js';
 
 const TasksListItem = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { task: { id, data, isDone }, removeTask } = props;
+  const { task: { id, data, isDone } } = props;
+  const dispatch = useDispatch();
+  const { removeTaskAction } = bindActionCreators(todoActionCreators, dispatch);
 
   const iconProps = {
     className: styles.icon,
@@ -21,7 +23,7 @@ const TasksListItem = (props) => {
     <div className={styles.task} key={id}>
       <input type='checkbox' checked={isDone} onChange={()=>{}}/>
       <div className={styles.text}>{data}</div>
-      <Icon {...iconProps} onClick={()=>removeTask(id)}/>
+      <Icon {...iconProps} onClick={()=>removeTaskAction(id)}/>
     </div>
 
   );
@@ -30,8 +32,7 @@ const TasksListItem = (props) => {
 const TasksList = () => {
   const { tasks, isFetching, error } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
-  const { getTasks } = bindActionCreators(todoActionCreators, dispatch);
-  const { removeTask } = bindActionCreators(todoActionCreators, dispatch);
+  const { getTasks} = bindActionCreators(todoActionCreators, dispatch);
 
   useEffect(() => {
     getTasks({ page: 1, results: 10 });
@@ -41,7 +42,7 @@ const TasksList = () => {
     <div className={styles.tasksContainer}>
       {tasks.map((t) => (
         // eslint-disable-next-line react/jsx-key
-        <TasksListItem key={t.id} task={t} removeTask={removeTask} />
+        <TasksListItem key={t.id} task={t} />
       ))}
      {isFetching && <li>Loading...</li>}
      {error && <li>ERROR</li>}

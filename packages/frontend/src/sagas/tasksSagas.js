@@ -39,15 +39,13 @@ export function * getTasksSaga (action) {
   }
 }
 
-export function * removeTaskSaga(action){
-  const { id } = action;
-  yield put(removeTaskRequest());
+export function * removeTaskSaga(data){
 
   try {
      const {
-      data: { data: task }
-    } = yield API.removeTask(id);
-    yield put(removeTaskSuccess(task));
+      data: { data: id }
+    } = yield API.removeTask(data);
+    yield put(removeTaskSuccess(id));
   }
   catch(error) {
     yield put(removeTaskError(error));
