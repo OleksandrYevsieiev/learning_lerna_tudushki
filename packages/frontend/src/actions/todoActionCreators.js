@@ -19,8 +19,9 @@ export const createTaskError = (error) => ({
   error
 });
 
-export const getTasksAction = () => ({
-  type: ACTION_TYPES.GET_TASKS_ACTION
+export const getTasksAction = (params) => ({
+  type: ACTION_TYPES.GET_TASKS_ACTION,
+  params
 });
 
 export const getTasksSuccess = (tasks) => ({

@@ -10,8 +10,8 @@ const todoReducer = (state = initialState, action) => {
   const { type } = action;
 
   switch (type) {
-    case ACTION_TYPES.CREATE_TASK_ACTION:
     case ACTION_TYPES.GET_TASKS_ACTION:
+    case ACTION_TYPES.CREATE_TASK_ACTION:
     case ACTION_TYPES.REMOVE_TASK_ACTION:{
       return {
         ...state,

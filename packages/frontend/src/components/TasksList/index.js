@@ -16,7 +16,7 @@ const TasksList = () => {
 
   return (
     <div className={styles.tasksContainer}>
-      {tasks && tasks.map((task) => (
+      {tasks.map((task) => (
         // eslint-disable-next-line react/jsx-key
         <TasksListItem key={task.id} task={task} />
       ))}
