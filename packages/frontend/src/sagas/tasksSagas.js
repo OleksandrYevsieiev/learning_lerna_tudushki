@@ -1,19 +1,15 @@
 import { put } from 'redux-saga/effects';
 import {
-  createTaskRequest,
   createTaskSuccess,
   createTaskError,
-  getTasksRequest,
   getTasksSuccess,
   getTasksError,
-  removeTaskRequest,
   removeTaskSuccess,
   removeTaskError
 } from '../actions/todoActionCreators';
 import * as API from './../api';
 
-export function * createTaskSaga ({ data }) {
-  yield put(createTaskRequest());
+export function * createTaskSaga({ data }) {
 
   try {
     const {
@@ -25,9 +21,8 @@ export function * createTaskSaga ({ data }) {
   }
 }
 
-export function * getTasksSaga (action) {
+export function * getTasksSaga(action) {
   const { params } = action;
-  yield put(getTasksRequest());
 
   try {
     const {

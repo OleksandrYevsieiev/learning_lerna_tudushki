@@ -7,7 +7,7 @@ import styles from './TaskForm.module.css';
 
 const TaskForm = () => {
   const dispatch = useDispatch();
-  const { createTask } = bindActionCreators(todoActionCreators, dispatch);
+  const { createTaskAction } = bindActionCreators(todoActionCreators, dispatch);
 
   return (
     <Formik
@@ -15,7 +15,7 @@ const TaskForm = () => {
         data: '',
         isDone: false
       }}
-      onSubmit={(values) => createTask(values)}>
+      onSubmit={(values) => createTaskAction(values)}>
       {(formik) => (
         <Form className={styles.container}>
           <Field className={styles.input} name='data' placeholder='Write your task here...'/>

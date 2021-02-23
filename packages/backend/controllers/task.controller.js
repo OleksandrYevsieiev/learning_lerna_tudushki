@@ -29,16 +29,17 @@ module.exports.createTask = async (req, res, next) => {
 }; */
 
 module.exports.getAllTasks = async (req, res, next) => {
-  const {
-    pagination: { page, results }
-  } = req;
+  const { pagination: { page, results } } = req;
   try {
     const foundTasks = await Task.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       limit: results,
       offset: (page - 1) * results
     });
-    res.status(200).send({ data: foundTasks });
+    if (foundTasks){
+      res.status(200).send({ data: foundTasks })
+    }
+    res.status(404).send('Tasks not found');
   } catch (err) {
     next(err);
   }
@@ -65,11 +66,12 @@ module.exports.removeTask = async (req, res, next) => {
     params: { id }
   } = req;
   try {
-    const removedTask = await Task.destroy({ where: { id: id } });
+    const foundTask = await Task.findByPk(id);
+    const removedTask = await foundTask.destroy();
     if (removedTask) {
-      return res.status(200).send('task removed');
+      res.status(200).send({ data: id });
     }
-    return res.status(404).send('Task not found');
+    res.status(404).send('Task not found');
   } catch (err) {
     next(err);
   }

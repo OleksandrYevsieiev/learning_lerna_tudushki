@@ -11,8 +11,6 @@ taskRouter
 
 taskRouter
   .route('/:id')
-/*   .get(taskController.getTask)
-  .patch(taskController.updateTask) */
   .delete(taskController.removeTask);
 
 module.exports = taskRouter;

@@ -10,5 +10,5 @@ export const getTasks = (params) => apiInstance.get(`/tasks?page=${params.page}&
 
 export const removeTask = (data) => {
   const { payload: { id } } = data;
-  apiInstance.delete(`/tasks/${id}`)
+  return apiInstance.delete(`/tasks/${id}`)
 };
